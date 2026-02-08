@@ -106,7 +106,6 @@ const App: React.FC = () => {
       heads
     };
 
-    // Update the user's project association if they are an investigator
     if (piUser) {
         const updatedUsers = users.map(u => 
             u.id === piId ? { ...u, projectId: projectId } : u
@@ -136,7 +135,7 @@ const App: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900">Project_expenditure_jk</h2>
+            <h2 className="text-3xl font-bold text-gray-900 text-center">Project Dashboard Portal</h2>
             <p className="text-gray-500 text-sm mt-2">Secure access to project funds</p>
           </div>
 
@@ -172,24 +171,17 @@ const App: React.FC = () => {
               Sign In
             </button>
           </form>
-
-          <div className="mt-8 p-4 bg-gray-50 rounded-2xl text-xs text-gray-400 leading-relaxed">
-            <p className="font-bold text-gray-500 mb-2 uppercase tracking-widest text-[10px]">Current Accounts in Database</p>
-            <div className="space-y-2 max-h-32 overflow-y-auto pr-2">
-              {users.map(u => (
-                <div key={u.id} className="flex justify-between items-center border-b border-gray-100 pb-1 last:border-0">
-                  <span className="font-semibold text-gray-600">{u.name} ({u.role})</span>
-                  <span>{u.username} / {u.password}</span>
-                </div>
-              ))}
-            </div>
+          
+          <div className="mt-8 pt-6 border-t border-gray-100 text-center">
+             <p className="text-xs text-gray-400 leading-relaxed">
+               Indian Institute of Technology Gandhinagar
+             </p>
           </div>
         </div>
       </div>
     );
   }
 
-  // Get project for currently logged in investigator, or list for admin
   const filteredProjects = currentUser.role === UserRole.ADMIN 
     ? projects 
     : projects.filter(p => p.id === currentUser.projectId || p.piId === currentUser.id);
@@ -303,7 +295,6 @@ const App: React.FC = () => {
           )}
         </div>
 
-        {/* Investigator Management Modal */}
         {isManagingUsers && currentUser.role === UserRole.ADMIN && (
             <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-[100] p-4">
                 <div className="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col animate-in zoom-in duration-300">
